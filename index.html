@@ -3,52 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malla Interactiva - Ingeniería de Software</title>
+    <title>Malla Interactiva - Ing. Civil Eléctrica</title>
+    <!-- Google Fonts: Cinzel para títulos, Roboto para cuerpo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <h1>Malla Interactiva - Ingeniería de Software</h1>
-        <p>Haz clic en una materia para ver más detalles y recursos.</p>
+        <h1>INGENIERÍA CIVIL ELÉCTRICA</h1>
+        <p class="subtitle">Malla Curricular Interactiva - UOH</p>
     </header>
 
-    <main class="malla-container">
-        <!-- Semestre 1 -->
-        <div class="semestre">
-            <h2>Semestre 1</h2>
-            <div class="materia" data-codigo="MAT-101" data-nombre="Cálculo I" data-descripcion="Fundamentos del cálculo diferencial e integral." data-recursos="https://ejemplo.com/recursos/calculo1">Cálculo I</div>
-            <div class="materia" data-codigo="PROG-101" data-nombre="Introducción a la Programación" data-descripcion="Lógica de programación y fundamentos con Python." data-recursos="https://ejemplo.com/recursos/prog1">Intro. a la Prog.</div>
-            <div class="materia" data-codigo="FIS-101" data-nombre="Física Clásica" data-descripcion="Mecánica Newtoniana." data-recursos="https://ejemplo.com/recursos/fisica1">Física Clásica</div>
-        </div>
-
-        <!-- Semestre 2 -->
-        <div class="semestre">
-            <h2>Semestre 2</h2>
-            <div class="materia prerequisito-MAT-101" data-codigo="MAT-102" data-nombre="Cálculo II" data-descripcion="Cálculo en varias variables." data-recursos="https://ejemplo.com/recursos/calculo2">Cálculo II</div>
-            <div class="materia prerequisito-PROG-101" data-codigo="PROG-102" data-nombre="Estructura de Datos" data-descripcion="Estructuras de datos fundamentales." data-recursos="https://ejemplo.com/recursos/datos">Estructura de Datos</div>
-            <!-- Agrega más materias aquí -->
-        </div>
+    <main class="malla-grid">
+        <!-- Los semestres se organizarán en una grilla para replicar la estructura original -->
+        <!-- La clase 'col-X' define en qué columna de la grilla va la materia -->
         
-        <!-- Agrega más semestres aquí -->
+        <!-- SEMESTRE 1 -->
+        <div class="semestre-label" style="grid-row: 10;">1º Semestre</div>
+        <div class="materia tipo-amarillo col-1" id="ICE-101" data-nombre="Precálculo" data-sct="6" data-prereq="">Precálculo</div>
+        <div class="materia tipo-amarillo col-2" id="ICE-102" data-nombre="Intr. a Matemáticas Discretas" data-sct="6" data-prereq="">Intr. a Mat. Discretas</div>
+        <div class="materia tipo-amarillo col-3" id="ICE-103" data-nombre="Herramientas Computacionales" data-sct="3" data-prereq="">Herr. Computacionales</div>
+        <div class="materia tipo-amarillo col-4" id="ICE-104" data-nombre="Ciencias Aplicadas a la Ingeniería" data-sct="6" data-prereq="">Ciencias Aplicadas</div>
+        <div class="materia tipo-amarillo col-5" id="ICE-105" data-nombre="Comunicación Oral y Escrita" data-sct="3" data-prereq="">Comunicación O. y E.</div>
+        <div class="materia tipo-amarillo col-6" id="ICE-106" data-nombre="Introducción a la Ingeniería" data-sct="6" data-prereq="">Intro. a la Ing.</div>
+
+        <!-- SEMESTRE 2 -->
+        <div class="semestre-label" style="grid-row: 9;">2º Semestre</div>
+        <div class="materia tipo-amarillo col-1" id="ICE-201" data-nombre="Cálculo Diferencial e Integral" data-sct="6" data-prereq="ICE-101">Cálculo Dif. e Integral</div>
+        <div class="materia tipo-amarillo col-2" id="ICE-202" data-nombre="Álgebra Lineal" data-sct="6" data-prereq="ICE-101,ICE-102">Álgebra Lineal</div>
+        <div class="materia tipo-verde col-3" id="ICE-203" data-nombre="Programación" data-sct="5" data-prereq="ICE-103">Programación</div>
+        <div class="materia tipo-amarillo col-4" id="ICE-204" data-nombre="Química" data-sct="4" data-prereq="ICE-104">Química</div>
+        <div class="materia tipo-amarillo col-5" id="ICE-205" data-nombre="Física I" data-sct="6" data-prereq="ICE-101">Física I</div>
+        <div class="materia tipo-amarillo col-7" id="FG-1" data-nombre="Inglés 1 / F.G." data-sct="3" data-prereq="">Inglés 1 / F.G.</div>
+
+        <!-- Y así sucesivamente para todos los semestres... -->
+        <!-- SEMESTRE 3 -->
+        <div class="semestre-label" style="grid-row: 8;">3º Semestre</div>
+        <div class="materia tipo-amarillo col-1" id="ICE-301" data-nombre="Cálculo Avanzado" data-sct="6" data-prereq="ICE-201,ICE-202">Cálculo Avanzado</div>
+        <div class="materia tipo-amarillo col-2" id="ICE-302" data-nombre="Ecuaciones Diferenciales" data-sct="6" data-prereq="ICE-201,ICE-202">Ecuaciones Diferenciales</div>
+        <div class="materia tipo-verde col-3" id="ICE-303" data-nombre="Diseño Digital y Aplicaciones" data-sct="4" data-prereq="ICE-203">Diseño Digital y App</div>
+        <div class="materia tipo-verde col-4" id="ICE-304" data-nombre="Análisis de Circuitos" data-sct="5" data-prereq="ICE-201,ICE-205">Análisis de Circuitos</div>
+        <div class="materia tipo-amarillo col-5" id="ICE-305" data-nombre="Física II" data-sct="6" data-prereq="ICE-201,ICE-205">Física II</div>
+        <div class="materia tipo-amarillo col-7" id="FG-2" data-nombre="Inglés 2 / F.G." data-sct="3" data-prereq="FG-1">Inglés 2 / F.G.</div>
+
+        <!-- ... (Aquí irían el resto de semestres, el HTML sería muy largo) -->
+        <!-- Para el ejemplo, terminaremos aquí, pero deberías completar el resto. -->
 
     </main>
 
-    <!-- Modal para mostrar la información de la materia -->
     <div id="modal-materia" class="modal">
         <div class="modal-content">
             <span class="close-button">×</span>
             <h3 id="modal-nombre">Nombre de la Materia</h3>
             <p><strong>Código:</strong> <span id="modal-codigo"></span></p>
-            <p id="modal-descripcion"></p>
+            <p><strong>Créditos SCT:</strong> <span id="modal-sct"></span></p>
+            <p><strong>Prerrequisitos:</strong> <span id="modal-prereq"></span></p>
             <a id="modal-recursos" href="#" target="_blank">Ver Material de Estudio</a>
         </div>
     </div>
 
     <footer>
-        <p>Proyecto creado para la comunidad estudiantil. <a href="https://github.com/tu-nombre-de-usuario/tu-nombre-de-usuario.github.io">Ver en GitHub</a></p>
+        <p>Transmutación realizada por un estudiante para estudiantes. <a href="https://github.com/tu-nombre-de-usuario/tu-nombre-de-usuario.github.io">Ver el Círculo en GitHub</a></p>
     </footer>
 
     <script src="js/main.js"></script>
