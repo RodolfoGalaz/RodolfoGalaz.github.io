@@ -1,4 +1,4 @@
-/* ===== CSS: Estilo Hermanos Elric ===== */
+/* ===== CSS: Transmutación Final con Detalles Alquímicos ===== */
 
 :root {
     --color-steel: #94a1a9;
@@ -81,7 +81,7 @@ header .subtitle {
     font-size: 0.8em;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.25s ease-out;
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
     border: 2px solid transparent;
     display: flex;
     align-items: center;
@@ -90,18 +90,14 @@ header .subtitle {
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
+/* ===== DETALLE #1: El Reloj del Alquimista (Borde Animado) ===== */
 .materia:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     border-color: var(--color-gold);
 }
 
-/* El icono SVG se oculta aquí */
-.materia-icon {
-    display: none;
-}
-
-/* Diferenciación sutil de materias */
+.materia-icon { display: none; }
 .materia.tipo-amarillo { background-color: #e9ecef; }
 .materia.tipo-verde { background-color: var(--color-steel); }
 
@@ -109,6 +105,17 @@ header .subtitle {
     border-color: var(--color-gold) !important;
     transform: scale(1.05);
     z-index: 10;
+}
+
+/* ===== DETALLE #3: La Piedra Filosofal (Brillo en cursos clave) ===== */
+#TIT-1001, #PRAC-801 {
+    animation: pulse-red 2.5s infinite;
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(158, 42, 43, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(158, 42, 43, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(158, 42, 43, 0); }
 }
 
 footer {
@@ -119,9 +126,11 @@ footer {
     color: #888;
 }
 
-/* --- Modal Style --- */
+/* ===== DETALLE #2: El Efecto Ouroboros (Animación del Modal) ===== */
 .modal {
-    display: none;
+    display: flex; /* Usamos flex para centrar fácilmente */
+    align-items: center;
+    justify-content: center;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -130,17 +139,36 @@ footer {
     height: 100%;
     background-color: rgba(27, 27, 27, 0.7);
     backdrop-filter: blur(5px);
+    
+    /* Estado inicial: oculto */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.modal.active {
+    /* Estado activo: visible */
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-content {
     background-color: var(--color-light-bg);
-    margin: 15% auto;
     padding: 2em;
     border-radius: 16px;
     width: 90%;
     max-width: 500px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     border-top: 8px solid var(--color-red);
+    
+    /* Animación de entrada */
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    /* Estado activo */
+    transform: scale(1);
 }
 
 .modal-content h3 {
@@ -151,7 +179,6 @@ footer {
 }
 
 #modal-recursos {
-    display: none;
     background-color: var(--color-red);
     color: #fff;
     padding: 12px 25px;
@@ -161,7 +188,7 @@ footer {
     margin-top: 1.5em;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    display: inline-block;
+    display: none; /* JS lo controla */
 }
 
 #modal-recursos:hover {
