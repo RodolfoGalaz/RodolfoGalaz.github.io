@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal-materia');
     const closeModal = document.querySelector('.close-button');
 
-    // Función para limpiar todos los resaltados
     const clearHighlights = () => {
         materias.forEach(m => {
             m.classList.remove('prereq-highlight');
@@ -20,13 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const prereqText = materia.dataset.prereq ? materia.dataset.prereq.split(',').join(', ') : "No tiene";
             document.getElementById('modal-prereq').textContent = prereqText;
 
-            // Mostrar u ocultar la descripción adicional
             const descElement = document.getElementById('modal-desc');
             if (materia.dataset.desc) {
                 descElement.textContent = materia.dataset.desc;
                 descElement.style.display = 'block';
             } else {
                 descElement.style.display = 'none';
+            }
+
+            // ===== LÓGICA DEL BOTÓN DE RECURSOS =====
+            const recursosBtn = document.getElementById('modal-recursos');
+            if (materia.dataset.recursos) {
+                recursosBtn.href = materia.dataset.recursos;
+                recursosBtn.style.display = 'inline-block'; // Muestra el botón
+            } else {
+                recursosBtn.style.display = 'none'; // Oculta el botón si no hay enlace
             }
             
             modal.style.display = 'block';
@@ -48,10 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Limpiar resaltados cuando el mouse sale de la grilla
     document.querySelector('.malla-grid').addEventListener('mouseleave', clearHighlights);
 
-    // --- Lógica del Modal ---
     const cerrarModal = () => {
         modal.style.display = 'none';
     };
