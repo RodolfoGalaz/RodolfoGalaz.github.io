@@ -3,126 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malla Interactiva - Ing. Civil Eléctrica</title>
-    <!-- Google Fonts: Poppins, un tipo de letra moderno y redondeado -->
+    <title>Centro de Mando Alquímico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/dexie@3/dist/dexie.js"></script>
+    <script src="js/script.js" defer></script>
+    <!-- En index.html, dentro del <head> -->
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
-    <div class="page-container">
+    <div class="app-container">
         <header>
-            <h1>Ingeniería Civil Eléctrica</h1>
-            <p class="subtitle">Malla Curricular Interactiva</p>
+            <h1>Centro de Mando Alquímico</h1>
+            <p class="subtitle">"La humanidad no puede obtener nada sin dar primero algo a cambio."</p>
+            <div class="settings-trigger" id="settings-trigger">⚙️</div>
         </header>
 
-        <main class="malla-grid">
-            <!-- Icono SVG de ejemplo. El CSS lo maneja, no necesitas repetirlo. -->
-            <svg class="materia-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        <nav>
+            <a href="#" class="nav-link active" data-target="dashboard">🚪 El Portal</a>
+            <a href="#" class="nav-link" data-target="malla">📜 Malla Alquímica</a>
+            <a href="#" class="nav-link" data-target="horario">🔬 Laboratorio Semanal</a>
+            <a href="#" class="nav-link" data-target="calendario">📅 Oráculo del Tiempo</a>
+            <a href="#" class="nav-link" data-target="biblioteca">📚 Archivo Secreto</a>
+            <a href="#" class="nav-link" data-target="recordatorios">📝 Decretos del Estado</a>
+        </nav>
+
+        <main>
+            <section id="dashboard" class="content-section active">
+                <h2>Resumen del Día</h2>
+                <div class="dashboard-grid">
+                    <div class="dashboard-widget">
+                        <h3>Eventos de Hoy</h3>
+                        <ul id="today-events-list" class="widget-list"></ul>
+                    </div>
+                    <div class="dashboard-widget">
+                        <h3>Decretos Urgentes</h3>
+                        <ul id="urgent-tasks-list" class="widget-list"></ul>
+                    </div>
+                    <div class="dashboard-widget pomodoro-widget">
+                        <h3>Círculo de Concentración</h3>
+                        <div id="pomodoro-timer" class="timer-display">25:00</div>
+                        <div id="pomodoro-mode" class="timer-mode">¡A Trabajar!</div>
+                        <div class="pomodoro-controls">
+                            <button id="pomodoro-start" class="btn-primary">Iniciar</button>
+                            <button id="pomodoro-pause" class="btn-secondary">Pausar</button>
+                            <button id="pomodoro-reset" class="btn-secondary">Resetear</button>
+                        </div>
+                    </div>
+                    <div class="dashboard-widget edward-widget">
+                        <img src="images/edward-dance.gif" alt="Edward Elric bailando">
+                    </div>
+                </div>
+            </section>
+
+            <section id="malla" class="content-section">
+                <h2>Tu Camino del Alquimista: Ing. Civil Eléctrica</h2>
+                <div class="gpa-display">Promedio Ponderado Acumulado (PPA): <span id="gpa-value">N/A</span></div>
+                <div class="malla-grid-container">
+                    <div class="malla-label r1">10° Sem.</div><div class="malla-label r2">9° Sem.</div><div class="malla-label r3">8° Sem.</div><div class="malla-label r4">7° Sem.</div><div class="malla-label r5">6° Sem.</div><div class="malla-label r6">5° Sem.</div><div class="malla-label r7">4° Sem.</div><div class="malla-label r8">3° Sem.</div><div class="malla-label r9">2° Sem.</div><div class="malla-label r10">1° Sem.</div>
+                    <div class="curso c2 r10" data-sct="6"><span>Precálculo</span><small>6 SCT</small></div><div class="curso c3 r10" data-sct="6"><span>Intr. a Mat. Discretas</span><small>6 SCT</small></div><div class="curso c4 r10" data-sct="3"><span>Herram. Computacionales</span><small>3 SCT</small></div><div class="curso c5 r10" data-sct="6"><span>Ciencias Aplicadas a la Ing.</span><small>6 SCT</small></div><div class="curso c6 r10" data-sct="3"><span>Comunicación Oral y Escrita</span><small>3 SCT</small></div><div class="curso c7 r10" data-sct="6"><span>Introducción a la Ing.</span><small>6 SCT</small></div>
+                    <div class="curso c2 r9" data-sct="6"><span>Cálculo Diferencial e Integral</span><small>6 SCT</small></div><div class="curso c3 r9" data-sct="6"><span>Álgebra Lineal</span><small>6 SCT</small></div><div class="curso c4 r9" data-sct="5"><span>Programación</span><small>5 SCT</small></div><div class="curso c5 r9" data-sct="4"><span>Química</span><small>4 SCT</small></div><div class="curso c6 r9" data-sct="6"><span>Física I</span><small>6 SCT</small></div><div class="curso c7 r9" data-sct="3"><span>Inglés 1 / F.G.</span><small>3 SCT</small></div>
+                    <div class="curso c2 r8" data-sct="6"><span>Cálculo Avanzado</span><small>6 SCT</small></div><div class="curso c3 r8" data-sct="6"><span>Ecuaciones Diferenciales</span><small>6 SCT</small></div><div class="curso c4 r8" data-sct="4"><span>Diseño Digital y Aplic.</span><small>4 SCT</small></div><div class="curso c5 r8" data-sct="5"><span>Análisis de Circuitos</span><small>5 SCT</small></div><div class="curso c6 r8" data-sct="6"><span>Física II</span><small>6 SCT</small></div><div class="curso c7 r8" data-sct="3"><span>Inglés 2 / F.G.</span><small>3 SCT</small></div>
+                    <div class="curso c2 r7" data-sct="6"><span>Probabilidad y Estadística</span><small>6 SCT</small></div><div class="curso c3 r7" data-sct="6"><span>Métodos Numéricos</span><small>6 SCT</small></div><div class="curso c4 r7" data-sct="6"><span>Electromagnetismo Aplic.</span><small>6 SCT</small></div><div class="curso c5 r7" data-sct="6"><span>Señales y Sistemas I</span><small>6 SCT</small></div><div class="curso c6 r7" data-sct="3"><span>Ética y R.S. en Ing.</span><small>3 SCT</small></div><div class="curso c7 r7" data-sct="3"><span>Inglés 3 / F.G. / Proyecto</span><small>3 SCT</small></div>
+                    <div class="curso c2 r6" data-sct="6"><span>Electivo Computación Avanzada</span><small>6 SCT</small></div><div class="curso c3 r6" data-sct="6"><span>Lab. de Ing. Eléct. y Aplic.</span><small>6 SCT</small></div><div class="curso c4 r6" data-sct="6"><span>Conversión Electromec.</span><small>6 SCT</small></div><div class="curso c5 r6" data-sct="6"><span>Señales y Sistemas II</span><small>6 SCT</small></div><div class="curso c6 r6" data-sct="3"><span>Trabajo Dirigido en Ing. Eléctrica</span><small>3 SCT</small></div><div class="curso c7 r6" data-sct="3"><span>Inglés 4</span><small>3 SCT</small></div>
+                    <div class="curso c2 r5" data-sct="6"><span>Economía y Gestión</span><small>6 SCT</small></div><div class="curso c3 r5" data-sct="6"><span>Optimización</span><small>6 SCT</small></div><div class="curso c4 r5" data-sct="6"><span>Sistemas Eléctricos de Energía</span><small>6 SCT</small></div><div class="curso c5 r5" data-sct="6"><span>Sistemas de Control</span><small>6 SCT</small></div><div class="curso c6 r5" data-sct="3"><span>Legislación y Medioamb.</span><small>3 SCT</small></div><div class="curso c7 r5" data-sct="3"><span>Inglés 5</span><small>3 SCT</small></div>
+                    <div class="curso c2 r4" data-sct="6"><span>Formulación y Eval. de Proyectos</span><small>6 SCT</small></div><div class="curso c3 r4" data-sct="6"><span>Taller de Diseño</span><small>6 SCT</small></div><div class="curso c4 r4" data-sct="6"><span>Electrónica</span><small>6 SCT</small></div><div class="curso c5 r4" data-sct="6"><span>Robótica</span><small>6 SCT</small></div><div class="curso c6 r4" data-sct="6"><span>Sistemas de Comunicación</span><small>6 SCT</small></div><div class="curso c8 r4 c-span-2" data-sct="12"><span>Práctica Profesional</span><small>12 SCT</small></div>
+                    <div class="curso c2 r3" data-sct="6"><span>Taller de Emprendimiento</span><small>6 SCT</small></div><div class="curso c3 r3" data-sct="6"><span>Taller de Innov. en Ing. Eléctrica</span><small>6 SCT</small></div><div class="curso c4 r3" data-sct="6"><span>Lab. Electivo de Ing. Eléct.</span><small>6 SCT</small></div><div class="curso c5 r3" data-sct="6"><span>Electivo I</span><small>6 SCT</small></div><div class="curso c6 r3" data-sct="6"><span>Electivo / Minor</span><small>6 SCT</small></div>
+                    <div class="curso c2 r2 c-span-2" data-sct="12"><span>Taller de Proyectos</span><small>12 SCT</small></div><div class="curso c4 r2" data-sct="6"><span>Electivo II</span><small>6 SCT</small></div><div class="curso c5 r2" data-sct="6"><span>Electivo / Minor</span><small>6 SCT</small></div><div class="curso c6 r2" data-sct="6"><span>Electivo / Minor</span><small>6 SCT</small></div>
+                    <div class="curso c2 r1 c-span-4" data-sct="30"><span>Trabajo de Título</span><small>30 SCT</small></div>
+                </div>
+            </section>
             
-            <!-- SEMESTRE 10 -->
-            <div class="semestre-label" style="grid-row: 1;">10º</div>
-            <div class="materia tipo-amarillo col-2" id="TIT-1001" data-nombre="Trabajo de Título" data-sct="30" data-prereq="PROY-901" data-desc="Req.: Todos los cursos obligatorios de carrera."><div class="materia-text">Trabajo de Título</div></div>
+            <section id="horario" class="content-section">
+                <h2>Plan de Acción Semanal</h2>
+                <div class="schedule-controls">
+                    <h3>Clases Fijas</h3>
+                    <button id="add-class-btn" class="btn-primary">Añadir Nueva Asignatura</button>
+                    <ul id="fixed-class-list" class="item-list"></ul>
+                </div>
+                <div class="schedule-table-container">
+                    <table id="weekly-schedule-table">
+                        <thead><tr><th>Hora</th><th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th><th>Viernes</th><th>Sábado</th></tr></thead>
+                        <tbody id="schedule-body"></tbody>
+                    </table>
+                </div>
+            </section>
 
-            <!-- SEMESTRE 9 -->
-            <div class="semestre-label" style="grid-row: 2;">9º</div>
-            <div class="materia tipo-amarillo col-2" id="PROY-901" data-nombre="Taller de Proyectos" data-sct="12" data-prereq="TIE-801,FORM-701"><div class="materia-text">Taller de Proyectos</div></div>
-            <div class="materia tipo-verde col-4" id="ELEC-901" data-nombre="Electivo II" data-sct="6" data-prereq=""><div class="materia-text">Electivo II</div></div>
-            <div class="materia tipo-verde col-5" id="ELEC-902" data-nombre="Electivo / Minor" data-sct="6" data-prereq=""><div class="materia-text">Electivo / Minor</div></div>
-            <div class="materia tipo-verde col-6" id="ELEC-903" data-nombre="Electivo / Minor" data-sct="6" data-prereq=""><div class="materia-text">Electivo / Minor</div></div>
+            <section id="calendario" class="content-section">
+                <h2>Previsiones y Ciclos Lunares</h2>
+                <p class="instruction">Haz clic en un día para añadir un evento (prueba, entrega, etc.)</p>
+                <div class="calendar-container">
+                    <div class="calendar-header"><button id="prev-month">◄</button><h3 id="month-year"></h3><button id="next-month">►</button></div>
+                    <div class="calendar-grid days-of-week"><div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div></div>
+                    <div class="calendar-grid" id="calendar-days"></div>
+                </div>
+            </section>
+            
+            <section id="biblioteca" class="content-section">
+                <h2>Textos Prohibidos y Recursos</h2>
+                <div class="library-controls">
+                    <form id="add-folder-form"><input type="text" id="folder-name-input" placeholder="Nombre de la nueva carpeta" required><button type="submit">Crear Carpeta</button></form>
+                    <form id="add-file-form" class="file-form"><label for="file-input" class="file-label">Seleccionar Pergamino...</label><input type="file" id="file-input" required><input type="text" id="file-custom-name" placeholder="Nombre del pergamino" required><select id="file-folder-select"></select><button type="submit">Sellar y Archivar</button></form>
+                </div>
+                <div id="file-library"></div>
+            </section>
 
-            <!-- SEMESTRE 8 -->
-            <div class="semestre-label" style="grid-row: 3;">8º</div>
-            <div class="materia tipo-amarillo col-1" id="EMP-801" data-nombre="Taller de Emprendimiento" data-sct="6" data-prereq="ECO-601"><div class="materia-text">Taller de Emprendimiento</div></div>
-            <div class="materia tipo-verde col-2" id="TIE-801" data-nombre="Taller de Innov. en Ing. Eléctrica" data-sct="6" data-prereq="DIS-701,FORM-701"><div class="materia-text">Taller de Innov. Eléctrica</div></div>
-            <div class="materia tipo-verde col-3" id="LAB-801" data-nombre="Laboratorio Electivo de Ing. Eléctr." data-sct="6" data-prereq=""><div class="materia-text">Lab. Electivo Ing. Eléctr.</div></div>
-            <div class="materia tipo-verde col-4" id="ELEC-801" data-nombre="Electivo I" data-sct="6" data-prereq=""><div class="materia-text">Electivo I</div></div>
-            <div class="materia tipo-verde col-6" id="ELEC-802" data-nombre="Electivo / Minor" data-sct="6" data-prereq=""><div class="materia-text">Electivo / Minor</div></div>
-            <div class="materia tipo-amarillo col-8" id="PRAC-801" data-nombre="Práctica Profesional" data-sct="12" data-prereq="" data-desc="Req.: 150 SCT aprobados."><div class="materia-text">Práctica Profesional</div></div>
-
-            <!-- SEMESTRE 7 -->
-            <div class="semestre-label" style="grid-row: 4;">7º</div>
-            <div class="materia tipo-amarillo col-1" id="FORM-701" data-nombre="Formulación y Evaluación de Proyectos" data-sct="6" data-prereq="ECO-601"><div class="materia-text">Form. y Eval. de Proyectos</div></div>
-            <div class="materia tipo-verde col-2" id="DIS-701" data-nombre="Taller de Diseño" data-sct="6" data-prereq="FORM-701"><div class="materia-text">Taller de Diseño</div></div>
-            <div class="materia tipo-verde col-3" id="ELEC-701" data-nombre="Electrónica" data-sct="6" data-prereq="CIR-304"><div class="materia-text">Electrónica</div></div>
-            <div class="materia tipo-verde col-4" id="ROB-701" data-nombre="Robótica" data-sct="6" data-prereq="ELEC-701"><div class="materia-text">Robótica</div></div>
-            <div class="materia tipo-verde col-5" id="SISCOM-701" data-nombre="Sistemas de Comunicación" data-sct="6" data-prereq="SEN-503"><div class="materia-text">Sistemas de Comunicación</div></div>
-
-            <!-- SEMESTRE 6 -->
-            <div class="semestre-label" style="grid-row: 5;">6º</div>
-            <div class="materia tipo-amarillo col-1" id="ECO-601" data-nombre="Economía y Gestión" data-sct="6" data-prereq="PROB-401"><div class="materia-text">Economía y Gestión</div></div>
-            <div class="materia tipo-verde col-2" id="OPT-601" data-nombre="Optimización" data-sct="6" data-prereq="ECO-601"><div class="materia-text">Optimización</div></div>
-            <div class="materia tipo-verde col-3" id="SISEN-601" data-nombre="Sistemas Eléctricos de Energía" data-sct="6" data-prereq="CONV-502"><div class="materia-text">Sist. Eléctricos de Energía</div></div>
-            <div class="materia tipo-verde col-4" id="CON-602" data-nombre="Sistemas de Control" data-sct="6" data-prereq="SEN-503"><div class="materia-text">Sistemas de Control</div></div>
-            <div class="materia tipo-amarillo col-6" id="LEG-601" data-nombre="Legislación en Ing. y Medioambiente" data-sct="3" data-prereq="ETI-405"><div class="materia-text">Legislación y Medioamb.</div></div>
-            <div class="materia tipo-amarillo col-8" id="FG-5" data-nombre="Inglés 5" data-sct="3" data-prereq="FG-4"><div class="materia-text">Inglés 5</div></div>
-
-            <!-- SEMESTRE 5 -->
-            <div class="semestre-label" style="grid-row: 6;">5º</div>
-            <div class="materia tipo-amarillo col-1" id="COMP-501" data-nombre="Electivo Computación Avanzada" data-sct="6" data-prereq="ICE-203"><div class="materia-text">Electivo Comp. Avanzada</div></div>
-            <div class="materia tipo-verde col-2" id="LAB-502" data-nombre="Lab. de Ing. Eléct. y Aplicaciones" data-sct="6" data-prereq="ELET-403"><div class="materia-text">Lab. Ing. Eléct. y App</div></div>
-            <div class="materia tipo-verde col-3" id="CONV-502" data-nombre="Conversión Electromec. de la Energía" data-sct="6" data-prereq="ELET-403"><div class="materia-text">Conv. Electromec. Energía</div></div>
-            <div class="materia tipo-verde col-4" id="SEN-503" data-nombre="Señales y Sistemas II" data-sct="6" data-prereq="SEN-404"><div class="materia-text">Señales y Sistemas II</div></div>
-            <div class="materia tipo-amarillo col-6" id="TD-504" data-nombre="Trabajo Dirigido en Ing. Eléctrica" data-sct="3" data-prereq="CIR-304,LEG-601"><div class="materia-text">Trabajo Dirigido</div></div>
-            <div class="materia tipo-amarillo col-8" id="FG-4" data-nombre="Inglés 4" data-sct="3" data-prereq="FG-3"><div class="materia-text">Inglés 4</div></div>
-
-            <!-- SEMESTRE 4 -->
-            <div class="semestre-label" style="grid-row: 7;">4º</div>
-            <div class="materia tipo-amarillo col-1" id="PROB-401" data-nombre="Probabilidad y Estadística" data-sct="6" data-prereq="ICE-301"><div class="materia-text">Prob. y Estadística</div></div>
-            <div class="materia tipo-amarillo col-2" id="NUM-402" data-nombre="Métodos Numéricos" data-sct="6" data-prereq="ICE-302,ICE-203"><div class="materia-text">Métodos Numéricos</div></div>
-            <div class="materia tipo-verde col-3" id="ELET-403" data-nombre="Electromagnetismo Aplicado" data-sct="6" data-prereq="ICE-301,ICE-305"><div class="materia-text">Electromagnetismo Aplic.</div></div>
-            <div class="materia tipo-verde col-4" id="SEN-404" data-nombre="Señales y Sistemas I" data-sct="6" data-prereq="ICE-302,CIR-304"><div class="materia-text">Señales y Sistemas I</div></div>
-            <div class="materia tipo-amarillo col-6" id="ETI-405" data-nombre="Ética y R.S. en Ingeniería" data-sct="3" data-prereq="ICE-105"><div class="materia-text">Ética y R.S. en Ing.</div></div>
-            <div class="materia tipo-amarillo col-8" id="FG-3" data-nombre="Inglés 3 / F.G. / Proyecto" data-sct="3" data-prereq="FG-2"><div class="materia-text">Inglés 3 / F.G.</div></div>
-
-            <!-- SEMESTRE 3 -->
-            <div class="semestre-label" style="grid-row: 8;">3º</div>
-            <div class="materia tipo-amarillo col-1" id="ICE-301" data-nombre="Cálculo Avanzado" data-sct="6" data-prereq="ICE-201,ICE-202"><div class="materia-text">Cálculo Avanzado</div></div>
-            <div class="materia tipo-amarillo col-2" id="ICE-302" data-nombre="Ecuaciones Diferenciales" data-sct="6" data-prereq="ICE-201,ICE-202"><div class="materia-text">Ecuaciones Diferenciales</div></div>
-            <div class="materia tipo-verde col-3" id="ICE-303" data-nombre="Diseño Digital y Aplicaciones" data-sct="4" data-prereq="ICE-203"><div class="materia-text">Diseño Digital y App</div></div>
-            <div class="materia tipo-verde col-4" id="CIR-304" data-nombre="Análisis de Circuitos" data-sct="5" data-prereq="ICE-201,ICE-205"><div class="materia-text">Análisis de Circuitos</div></div>
-            <div class="materia tipo-amarillo col-5" id="ICE-305" data-nombre="Física II" data-sct="6" data-prereq="ICE-201,ICE-205"><div class="materia-text">Física II</div></div>
-            <div class="materia tipo-amarillo col-8" id="FG-2" data-nombre="Inglés 2 / F.G." data-sct="3" data-prereq="FG-1"><div class="materia-text">Inglés 2 / F.G.</div></div>
-
-            <!-- SEMESTRE 2 -->
-            <div class="semestre-label" style="grid-row: 9;">2º</div>
-            <div class="materia tipo-amarillo col-1" id="ICE-201" data-nombre="Cálculo Diferencial e Integral" data-sct="6" data-prereq="ICE-101"><div class="materia-text">Cálculo Dif. e Integral</div></div>
-            <div class="materia tipo-amarillo col-2" id="ICE-202" data-nombre="Álgebra Lineal" data-sct="6" data-prereq="ICE-101,ICE-102"><div class="materia-text">Álgebra Lineal</div></div>
-            <div class="materia tipo-verde col-3" id="ICE-203" data-nombre="Programación" data-sct="5" data-prereq="ICE-103"><div class="materia-text">Programación</div></div>
-            <div class="materia tipo-amarillo col-4" id="ICE-204" data-nombre="Química" data-sct="4" data-prereq="ICE-104"><div class="materia-text">Química</div></div>
-            <div class="materia tipo-amarillo col-5" id="ICE-205" data-nombre="Física I" data-sct="6" data-prereq="ICE-101,ICE-104"><div class="materia-text">Física I</div></div>
-            <div class="materia tipo-amarillo col-8" id="FG-1" data-nombre="Inglés 1 / F.G." data-sct="3" data-prereq=""><div class="materia-text">Inglés 1 / F.G.</div></div>
-
-            <!-- SEMESTRE 1 -->
-            <div class="semestre-label" style="grid-row: 10;">1º</div>
-            <div class="materia tipo-amarillo col-1" id="ICE-101" data-nombre="Precálculo" data-sct="6" data-prereq="" data-recursos="https://www.khanacademy.org/math/precalculus"><div class="materia-text">Precálculo</div></div>
-            <div class="materia tipo-amarillo col-2" id="ICE-102" data-nombre="Intr. a Matemáticas Discretas" data-sct="6" data-prereq="" data-recursos="https://www.ejemplo.com/mat-discretas"><div class="materia-text">Intr. a Mat. Discretas</div></div>
-            <div class="materia tipo-amarillo col-3" id="ICE-103" data-nombre="Herramientas Computacionales" data-sct="3" data-prereq="" data-recursos="https://www.ejemplo.com/herramientas-comp"><div class="materia-text">Herr. Computacionales</div></div>
-            <div class="materia tipo-amarillo col-4" id="ICE-104" data-nombre="Ciencias Aplicadas a la Ingeniería" data-sct="6" data-prereq=""><div class="materia-text">Ciencias Aplicadas</div></div>
-            <div class="materia tipo-amarillo col-5" id="ICE-105" data-nombre="Comunicación Oral y Escrita" data-sct="3" data-prereq=""><div class="materia-text">Comunicación O. y E.</div></div>
-            <div class="materia tipo-amarillo col-6" id="ICE-106" data-nombre="Introducción a la Ingeniería" data-sct="6" data-prereq=""><div class="materia-text">Intro. a la Ing.</div></div>
+            <section id="recordatorios" class="content-section">
+                <h2>Misiones de Alquimista Estatal</h2>
+                <form id="add-task-form"><input type="text" id="task-input" placeholder="Nueva directiva..." required><select id="task-priority-input"><option value="alta">Prioridad Alta</option><option value="normal" selected>Normal</option><option value="baja">Baja</option></select><button type="submit">Decretar Misión</button></form>
+                <ul id="task-list" class="item-list"></ul>
+            </section>
         </main>
-
-        <footer>
-            <p>Hecho con el principio de Intercambio Equivalente.</p>
-        </footer>
     </div>
-
-    <!-- Modal (lo sacamos del contenedor principal para que se posicione correctamente) -->
-    <div id="modal-materia" class="modal">
+    
+    <!-- MODALES -->
+    <div id="event-modal" class="modal-overlay">
         <div class="modal-content">
-            <span class="close-button">×</span>
-            <h3 id="modal-nombre">Nombre de la Materia</h3>
-            <p><strong>Código:</strong> <span id="modal-codigo"></span></p>
-            <p><strong>Créditos SCT:</strong> <span id="modal-sct"></span></p>
-            <p><strong>Prerrequisitos:</strong> <span id="modal-prereq"></span></p>
-            <p id="modal-desc" style="font-style: italic;"></p>
-            <a id="modal-recursos" href="#" target="_blank">Ver Material de Estudio</a>
+            <h3>Añadir Evento Alquímico</h3>
+            <form id="event-form"><input type="hidden" id="event-date"><label for="event-title-input">Título del Evento:</label><input type="text" id="event-title-input" required placeholder="Ej: Prueba de Cálculo II"><label for="event-time-input">Hora de Inicio:</label><input type="time" id="event-time-input" required><label for="event-end-time-input">Hora de Fin:</label><input type="time" id="event-end-time-input" required><label for="event-type-input">Tipo de Evento:</label><select id="event-type-input"><option value="prueba">Prueba / Examen</option><option value="entrega">Entrega / Tarea</option><option value="estudio">Sesión de Estudio</option><option value="otro">Otro</option></select><div class="modal-buttons"><button type="submit" class="btn-primary">Sellar Evento</button><button type="button" id="cancel-event-btn" class="btn-secondary">Cancelar</button></div></form>
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <div id="grade-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Sellar Calificación</h3>
+            <form id="grade-form"><p>Ingresa la nota final para: <strong id="grade-course-name"></strong></p><input type="hidden" id="grade-course-index"><label for="grade-input">Nota (1.0 - 7.0):</label><input type="number" id="grade-input" step="0.1" min="1.0" max="7.0" required><div class="modal-buttons"><button type="submit" class="btn-primary">Registrar Nota</button><button type="button" id="cancel-grade-btn" class="btn-secondary">Cancelar</button></div></form>
+        </div>
+    </div>
+    
+    <div id="class-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Añadir Asignatura Fija</h3>
+            <form id="add-class-form">
+                <label for="class-title-input">Nombre Asignatura:</label>
+                <input type="text" id="class-title-input" placeholder="Ej: Cálculo Avanzado" required>
+                <label for="class-color-input">Color de Asignatura:</label>
+                <input type="color" id="class-color-input" value="#e63946">
+                <hr>
+                <h4>Bloques de Clases</h4>
+                <div id="class-blocks-container"></div>
+                <button type="button" id="add-class-block-btn" class="btn-secondary">Añadir Bloque (Cátedra/Ayudantía)</button>
+                <hr>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-primary">Guardar Asignatura</button>
+                    <button type="button" id="cancel-class-btn" class="btn-secondary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="settings-panel" class="settings-panel">
+        <h3>Laboratorio Estético</h3><p>Elige el acento de tu círculo:</p>
+        <div class="theme-options"><button class="theme-btn" data-theme="rojo" style="background-color: #e63946;"></button><button class="theme-btn" data-theme="azul" style="background-color: #457b9d;"></button><button class="theme-btn" data-theme="verde" style="background-color: #2a9d8f;"></button><button class="theme-btn" data-theme="purpura" style="background-color: #9b59b6;"></button></div>
+        <button id="close-settings-btn" class="btn-secondary">Cerrar</button>
+    </div>
+    
+    <audio id="pomodoro-sound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
 </body>
 </html>
