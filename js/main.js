@@ -27,21 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 descElement.style.display = 'none';
             }
 
-            // ===== LÓGICA DEL BOTÓN DE RECURSOS =====
             const recursosBtn = document.getElementById('modal-recursos');
             if (materia.dataset.recursos) {
                 recursosBtn.href = materia.dataset.recursos;
-                recursosBtn.style.display = 'inline-block'; // Muestra el botón
+                recursosBtn.style.display = 'inline-block';
             } else {
-                recursosBtn.style.display = 'none'; // Oculta el botón si no hay enlace
+                recursosBtn.style.display = 'none';
             }
             
-            modal.style.display = 'block';
+            modal.classList.add('active'); // Usamos una clase para la animación
         });
 
         // Evento para resaltar prerrequisitos al pasar el mouse
-        materia.addEventListener('mouseover', () => {
-            clearHighlights();
+        materia.addEventListener('mouseenter', () => {
             const prereqCodes = materia.dataset.prereq.split(',');
             
             if (prereqCodes[0] !== "") {
@@ -53,12 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+
+        // ===== SOLUCIÓN AL HOVER FANTASMA =====
+        // Cuando el mouse sale de la materia, limpiamos los resaltados.
+        materia.addEventListener('mouseleave', clearHighlights);
     });
 
-    document.querySelector('.malla-grid').addEventListener('mouseleave', clearHighlights);
-
+    // --- Lógica del Modal ---
     const cerrarModal = () => {
-        modal.style.display = 'none';
+        modal.classList.remove('active'); // Usamos la clase para la animación de salida
     };
 
     closeModal.addEventListener('click', cerrarModal);
