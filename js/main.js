@@ -1,5 +1,3 @@
-// js/main.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const materias = document.querySelectorAll('.materia');
     const modal = document.getElementById('modal-materia');
@@ -8,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función para limpiar todos los resaltados
     const clearHighlights = () => {
         materias.forEach(m => {
-            m.classList.remove('prereq-highlight', 'successor-highlight');
+            m.classList.remove('prereq-highlight');
         });
     };
 
@@ -21,10 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const prereqText = materia.dataset.prereq ? materia.dataset.prereq.split(',').join(', ') : "No tiene";
             document.getElementById('modal-prereq').textContent = prereqText;
-            
-            // Aquí puedes configurar el enlace a los recursos si lo tienes
-            // document.getElementById('modal-recursos').href = "tu/enlace/" + materia.id;
 
+            // Mostrar u ocultar la descripción adicional
+            const descElement = document.getElementById('modal-desc');
+            if (materia.dataset.desc) {
+                descElement.textContent = materia.dataset.desc;
+                descElement.style.display = 'block';
+            } else {
+                descElement.style.display = 'none';
+            }
+            
             modal.style.display = 'block';
         });
 
