@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malla Interactiva - Ingeniería de Software</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Malla Interactiva - Ingeniería de Software</h1>
+        <p>Haz clic en una materia para ver más detalles y recursos.</p>
+    </header>
+
+    <main class="malla-container">
+        <!-- Semestre 1 -->
+        <div class="semestre">
+            <h2>Semestre 1</h2>
+            <div class="materia" data-codigo="MAT-101" data-nombre="Cálculo I" data-descripcion="Fundamentos del cálculo diferencial e integral." data-recursos="https://ejemplo.com/recursos/calculo1">Cálculo I</div>
+            <div class="materia" data-codigo="PROG-101" data-nombre="Introducción a la Programación" data-descripcion="Lógica de programación y fundamentos con Python." data-recursos="https://ejemplo.com/recursos/prog1">Intro. a la Prog.</div>
+            <div class="materia" data-codigo="FIS-101" data-nombre="Física Clásica" data-descripcion="Mecánica Newtoniana." data-recursos="https://ejemplo.com/recursos/fisica1">Física Clásica</div>
+        </div>
+
+        <!-- Semestre 2 -->
+        <div class="semestre">
+            <h2>Semestre 2</h2>
+            <div class="materia prerequisito-MAT-101" data-codigo="MAT-102" data-nombre="Cálculo II" data-descripcion="Cálculo en varias variables." data-recursos="https://ejemplo.com/recursos/calculo2">Cálculo II</div>
+            <div class="materia prerequisito-PROG-101" data-codigo="PROG-102" data-nombre="Estructura de Datos" data-descripcion="Estructuras de datos fundamentales." data-recursos="https://ejemplo.com/recursos/datos">Estructura de Datos</div>
+            <!-- Agrega más materias aquí -->
+        </div>
+        
+        <!-- Agrega más semestres aquí -->
+
+    </main>
+
+    <!-- Modal para mostrar la información de la materia -->
+    <div id="modal-materia" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h3 id="modal-nombre">Nombre de la Materia</h3>
+            <p><strong>Código:</strong> <span id="modal-codigo"></span></p>
+            <p id="modal-descripcion"></p>
+            <a id="modal-recursos" href="#" target="_blank">Ver Material de Estudio</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Proyecto creado para la comunidad estudiantil. <a href="https://github.com/tu-nombre-de-usuario/tu-nombre-de-usuario.github.io">Ver en GitHub</a></p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
