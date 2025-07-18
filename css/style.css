@@ -1,53 +1,60 @@
-/* ===== CÓDIGO CSS RESTAURADO Y CORREGIDO ===== */
-/* css/style.css - Estilo Pergamino Fullmetal Alchemist */
+/* ===== CSS: Estilo Hermanos Elric ===== */
 
 :root {
-    --fma-red: #aa2a2a;
-    --fma-blue: #2c3e50;
-    --fma-gold: #d4af37;
-    --fma-steel: #708090;
-    --fma-pergamino: #faf3e0; /* Color de fondo principal */
-    --fma-text: #3d352a;
+    --color-steel: #94a1a9;
+    --color-red: #9e2a2b;
+    --color-gold: #e0b741;
+    --color-dark: #1b1b1b;
+    --color-light-bg: #f4f1de;
+    --font-family: 'Poppins', sans-serif;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--fma-pergamino); /* ¡SOLUCIÓN! Color sólido, sin imagen. */
-    color: var(--fma-text);
+    background-color: var(--color-dark);
+    font-family: var(--font-family);
+    color: var(--color-dark);
     margin: 0;
     padding: 2em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
 }
 
-header, footer {
+.page-container {
+    width: 100%;
+    max-width: 1600px;
+    background-color: var(--color-light-bg);
+    border-radius: 24px;
+    padding: 2em 3em;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+header {
     text-align: center;
-    margin: 0 auto 2.5em auto;
-    color: var(--fma-blue);
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 1.5em;
+    margin-bottom: 2em;
 }
 
 header h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 3em;
-    margin-bottom: 0;
-    letter-spacing: 2px;
+    font-size: 2.5em;
+    color: var(--color-red);
+    margin: 0;
+    font-weight: 700;
 }
 
-footer a {
-    color: var(--fma-red);
-    font-weight: bold;
-    text-decoration: none;
+header .subtitle {
+    font-size: 1.1em;
+    color: #777;
+    margin-top: 0.5em;
 }
 
-/* --- La Grilla de la Malla --- */
 .malla-grid {
     display: grid;
-    grid-template-columns: 100px repeat(8, 1fr);
-    grid-auto-rows: 90px;
-    gap: 8px 12px;
-    max-width: 1600px;
-    margin: auto;
-    padding: 1em 0;
+    grid-template-columns: 60px repeat(8, 1fr);
+    grid-auto-rows: minmax(80px, auto);
+    gap: 15px;
 }
 
 .semestre-label {
@@ -55,10 +62,9 @@ footer a {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    color: var(--fma-red);
-    font-size: 1.1em;
+    font-weight: 600;
+    font-size: 1.2em;
+    color: var(--color-red);
 }
 
 .col-1 { grid-column: 2 / 3; } .col-2 { grid-column: 3 / 4; }
@@ -67,37 +73,53 @@ footer a {
 .col-7 { grid-column: 8 / 9; } .col-8 { grid-column: 9 / 10; }
 
 .materia {
-    border: 2px solid;
-    border-radius: 8px;
-    padding: 5px;
+    background-color: var(--color-steel);
+    color: var(--color-dark);
+    border-radius: 12px;
+    padding: 10px;
     text-align: center;
-    font-size: 0.85em;
-    font-weight: 700;
+    font-size: 0.8em;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.6);
+    transition: all 0.25s ease-out;
+    border: 2px solid transparent;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .materia:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    border-color: var(--color-gold);
 }
 
-.materia.tipo-amarillo { border-color: var(--fma-gold); }
-.materia.tipo-verde { border-color: var(--fma-red); }
-.materia.tipo-amarillo:hover { background-color: #fffbe0; }
-.materia.tipo-verde:hover { background-color: #ffe0e0; }
+/* El icono SVG se oculta aquí */
+.materia-icon {
+    display: none;
+}
 
-/* --- Estilos de Resaltado --- */
+/* Diferenciación sutil de materias */
+.materia.tipo-amarillo { background-color: #e9ecef; }
+.materia.tipo-verde { background-color: var(--color-steel); }
+
 .prereq-highlight {
-    box-shadow: 0 0 15px 5px var(--fma-gold);
+    border-color: var(--color-gold) !important;
     transform: scale(1.05);
+    z-index: 10;
 }
 
-/* --- Modal --- */
+footer {
+    text-align: center;
+    padding-top: 2em;
+    margin-top: 2em;
+    border-top: 2px solid #ddd;
+    color: #888;
+}
+
+/* --- Modal Style --- */
 .modal {
     display: none;
     position: fixed;
@@ -106,60 +128,59 @@ footer a {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
+    background-color: rgba(27, 27, 27, 0.7);
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background-color: var(--fma-pergamino);
-    border: 3px solid var(--fma-red);
+    background-color: var(--color-light-bg);
     margin: 15% auto;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 2em;
+    border-radius: 16px;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    position: relative;
-    font-family: 'Roboto', sans-serif;
-    color: var(--fma-text);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    border-top: 8px solid var(--color-red);
 }
 
 .modal-content h3 {
-    font-family: 'Cinzel', serif;
-    color: var(--fma-red);
+    color: var(--color-red);
     text-align: center;
+    margin: 0 0 1em 0;
+    font-size: 1.8em;
 }
 
-/* --- Botón de Recursos --- */
 #modal-recursos {
-    display: none; /* Oculto por defecto, JS lo mostrará */
-    background-color: var(--fma-blue);
+    display: none;
+    background-color: var(--color-red);
     color: #fff;
-    padding: 10px 20px;
+    padding: 12px 25px;
     text-align: center;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 1em;
+    border-radius: 8px;
+    margin-top: 1.5em;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
 }
 
 #modal-recursos:hover {
-    background-color: var(--fma-red);
+    background-color: var(--color-dark);
+    transform: scale(1.05);
 }
 
 .close-button {
-    color: #888;
+    color: #aaa;
     position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
+    top: 15px;
+    right: 20px;
+    font-size: 2.5em;
+    line-height: 1;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .close-button:hover {
-    color: var(--fma-red);
-    transform: rotate(180deg);
+    color: var(--color-red);
+    transform: rotate(90deg);
 }
