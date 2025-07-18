@@ -1,91 +1,171 @@
-/* css/style.css */
+/* css/style.css - Estilo Otaku/Pastel */
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 20px;
+/* --- Paleta de Colores Sugerida --- */
+:root {
+    --bg-color: #f3e5f5; /* Lavanda muy pálido */
+    --container-bg: #ffffff; /* Blanco puro para los semestres */
+    --materia-bg: #e1f5fe; /* Azul cielo pálido */
+    --materia-hover-bg: #d0ebf6;
+    --materia-border: #b3e5fc; /* Borde azul un poco más oscuro */
+    --main-text-color: #4a4a4a; /* Gris oscuro, no negro */
+    --title-color: #8e24aa; /* Morado vibrante */
+    --accent-color: #ff80ab; /* Rosa para acentos */
 }
 
+/* --- Estilos Generales y Tipografía --- */
+body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    line-height: 1.6;
+    background-color: var(--bg-color);
+    /* Opcional: añade un fondo sutil */
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+    color: var(--main-text-color);
+    margin: 0;
+    padding: 2em;
+}
+
+h1, h2, h3 {
+    color: var(--title-color);
+    font-weight: 700; /* Letra más gruesa para títulos */
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--title-color);
+}
+
+/* --- Estructura Principal --- */
 header, footer {
     text-align: center;
-    margin-bottom: 20px;
+    margin: 0 auto 2em auto;
+    max-width: 800px;
+}
+
+header h1 {
+    font-size: 2.5em;
 }
 
 .malla-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
     justify-content: center;
+    padding: 20px 0;
 }
 
 .semestre {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 15px;
-    width: 250px;
+    background-color: var(--container-bg);
+    border-radius: 20px; /* Bordes muy redondeados */
+    box-shadow: 0 4px 15px rgba(142, 36, 170, 0.1); /* Sombra de color sutil */
+    padding: 20px;
+    width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.semestre:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(142, 36, 170, 0.15);
 }
 
 .semestre h2 {
     text-align: center;
-    color: #005a9c;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 10px;
+    border-bottom: 2px dashed var(--bg-color);
+    padding-bottom: 15px;
     margin-top: 0;
 }
 
+/* --- El Corazón: Las Materias --- */
 .materia {
-    background-color: #e3f2fd;
-    border: 1px solid #bbdefb;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+    background-color: var(--materia-bg);
+    border: 1px solid var(--materia-border);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
 }
 
 .materia:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: scale(1.05) rotate(-1deg); /* Efecto divertido al pasar el mouse */
+    background-color: var(--materia-hover-bg);
+    box-shadow: 0 4px 10px rgba(0, 150, 200, 0.2);
 }
 
-/* Estilos para el Modal */
+/* --- El Modal Interactivo --- */
 .modal {
-    display: none; /* Oculto por defecto */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.4);
+    backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo */
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: var(--container-bg);
     margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
     max-width: 500px;
-    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     position: relative;
+    border-top: 10px solid var(--accent-color); /* Borde superior de acento */
+    animation: slide-in 0.5s ease-out; /* Animación de entrada */
+}
+
+/* Animación para el modal */
+@keyframes slide-in {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .close-button {
     color: #aaa;
-    float: right;
-    font-size: 28px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
     font-weight: bold;
     cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: black;
+    color: var(--accent-color);
+    transform: rotate(90deg);
+}
+
+/* Estilo del botón de recursos dentro del modal */
+#modal-recursos {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px; /* Botón de píldora */
+    margin-top: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#modal-recursos:hover {
+    background-color: var(--title-color);
+    transform: scale(1.05);
 }
