@@ -1,20 +1,19 @@
-/* ===== CÓDIGO CSS CORRECTO Y FINAL ===== */
-/* css/style.css - Estilo Elegante Fullmetal Alchemist */
+/* ===== CÓDIGO CSS RESTAURADO Y CORREGIDO ===== */
+/* css/style.css - Estilo Pergamino Fullmetal Alchemist */
 
 :root {
-    --fma-red: #c0392b; /* Rojo más sobrio */
-    --fma-blue: #2c3e50; /* Azul militar oscuro */
-    --fma-gold: #f1c40f; /* Dorado brillante */
-    --fma-steel: #7f8c8d; /* Gris acero */
-    --fma-pergamino: #fdf6e3; /* Pergamino claro para texto y modales */
-    --fma-dark-bg: #1f2a36; /* FONDO PRINCIPAL: Azul casi negro */
-    --fma-text-light: #ecf0f1; /* Texto principal claro */
+    --fma-red: #aa2a2a;
+    --fma-blue: #2c3e50;
+    --fma-gold: #d4af37;
+    --fma-steel: #708090;
+    --fma-pergamino: #faf3e0; /* Color de fondo principal */
+    --fma-text: #3d352a;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--fma-dark-bg); /* ¡Aquí está la solución! Un color sólido, sin url() */
-    color: var(--fma-text-light);
+    background-color: var(--fma-pergamino); /* ¡SOLUCIÓN! Color sólido, sin imagen. */
+    color: var(--fma-text);
     margin: 0;
     padding: 2em;
     -webkit-font-smoothing: antialiased;
@@ -24,36 +23,23 @@ body {
 header, footer {
     text-align: center;
     margin: 0 auto 2.5em auto;
+    color: var(--fma-blue);
 }
 
 header h1 {
     font-family: 'Cinzel', serif;
     font-size: 3em;
     margin-bottom: 0;
-    letter-spacing: 3px;
-    color: var(--fma-text-light);
-}
-
-header .subtitle {
-    color: var(--fma-steel);
-    font-size: 1.2em;
-}
-
-footer {
-    color: var(--fma-steel);
+    letter-spacing: 2px;
 }
 
 footer a {
-    color: var(--fma-gold);
+    color: var(--fma-red);
     font-weight: bold;
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
-footer a:hover {
-    color: var(--fma-text-light);
-}
-
+/* --- La Grilla de la Malla --- */
 .malla-grid {
     display: grid;
     grid-template-columns: 100px repeat(8, 1fr);
@@ -71,7 +57,7 @@ footer a:hover {
     justify-content: center;
     font-family: 'Cinzel', serif;
     font-weight: 700;
-    color: var(--fma-gold);
+    color: var(--fma-red);
     font-size: 1.1em;
 }
 
@@ -88,28 +74,30 @@ footer a:hover {
     font-size: 0.85em;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    background-color: var(--fma-blue);
-    color: var(--fma-text-light);
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .materia:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .materia.tipo-amarillo { border-color: var(--fma-gold); }
 .materia.tipo-verde { border-color: var(--fma-red); }
+.materia.tipo-amarillo:hover { background-color: #fffbe0; }
+.materia.tipo-verde:hover { background-color: #ffe0e0; }
 
+/* --- Estilos de Resaltado --- */
 .prereq-highlight {
-    box-shadow: 0 0 12px 3px var(--fma-gold);
-    transform: translateY(-2px) scale(1.03);
-    z-index: 10;
+    box-shadow: 0 0 15px 5px var(--fma-gold);
+    transform: scale(1.05);
 }
 
+/* --- Modal --- */
 .modal {
     display: none;
     position: fixed;
@@ -118,36 +106,54 @@ footer a:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
 }
 
 .modal-content {
     background-color: var(--fma-pergamino);
-    color: var(--fma-blue);
-    border: 3px solid var(--fma-gold);
+    border: 3px solid var(--fma-red);
     margin: 15% auto;
     padding: 30px;
     border-radius: 10px;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     position: relative;
+    font-family: 'Roboto', sans-serif;
+    color: var(--fma-text);
 }
 
 .modal-content h3 {
     font-family: 'Cinzel', serif;
     color: var(--fma-red);
     text-align: center;
-    margin-top: 0;
+}
+
+/* --- Botón de Recursos --- */
+#modal-recursos {
+    display: none; /* Oculto por defecto, JS lo mostrará */
+    background-color: var(--fma-blue);
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#modal-recursos:hover {
+    background-color: var(--fma-red);
 }
 
 .close-button {
-    color: var(--fma-steel);
+    color: #888;
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
